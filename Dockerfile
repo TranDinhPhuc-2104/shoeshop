@@ -1,5 +1,5 @@
 # Build stage#
-FROM public.ecr.aws/docker/library/maven:3.5.3-jdk-8-alpine AS build
+FROM public.ecr.aws/docker/library/maven:3.9-eclipse-temurin-8 AS build
 WORKDIR /app
 COPY . .
 RUN mvn install -DskipTests=true
