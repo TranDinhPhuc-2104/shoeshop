@@ -1,12 +1,81 @@
-<div class="footer-container" xmlns:th="http://www.thymeleaf.org">
-  
-   
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
-</html>
-     
+<div xmlns:th="http://www.thymeleaf.org">
+  <!-- Modern Global Site Footer -->
+  <footer class="site-footer-modern">
+    <div class="container">
+      <div class="row gy-4">
+        <!-- Col 1: Brand Info -->
+        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+          <div class="footer-brand">
+            <h4 class="d-flex align-items-center gap-2">
+              <span class="brand-icon-box mr-2" style="width: 32px; height: 32px; font-size: 0.9rem;">
+                <i class="fas fa-shoe-prints"></i>
+              </span>
+              <span>KICKS<span class="brand-highlight">HUB</span></span>
+            </h4>
+            <p class="mt-3">
+              The premier destination for authentic sneakers, street footwear, and performance athletic shoes. Curated collections, guaranteed 100% genuine.
+            </p>
+            <div class="footer-social-row">
+              <a href="#" class="footer-social-btn" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="footer-social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="footer-social-btn" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="footer-social-btn" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Col 2: Quick Links -->
+        <div class="col-lg-2 col-md-6 col-6 mb-4 mb-lg-0">
+          <h6 class="footer-col-title">Navigation</h6>
+          <ul class="footer-nav-list">
+            <li><a th:href="@{/}">Home Page</a></li>
+            <li><a th:href="@{/productList}">Sneaker Catalog</a></li>
+            <li><a th:href="@{/shoppingCart}">My Shopping Bag</a></li>
+            <li><a th:href="@{/admin/login}">Member Sign In</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Categories -->
+        <div class="col-lg-3 col-md-6 col-6 mb-4 mb-lg-0">
+          <h6 class="footer-col-title">Collections</h6>
+          <ul class="footer-nav-list">
+            <li><a th:href="@{/productList(name='Running')}">Running & Track</a></li>
+            <li><a th:href="@{/productList(name='Boost')}">Boost & Energy</a></li>
+            <li><a th:href="@{/productList(name='Air')}">Air Classics</a></li>
+            <li><a th:href="@{/productList}">All Releases</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Newsletter & Guarantee -->
+        <div class="col-lg-3 col-md-6">
+          <h6 class="footer-col-title">VIP Sneaker Club</h6>
+          <p class="small text-muted mb-2">Subscribe to unlock early drop access and exclusive discounts.</p>
+          <div class="position-relative">
+            <input type="email" class="footer-newsletter-input" placeholder="Your email address...">
+            <button class="btn btn-modern btn-modern-primary btn-modern-sm w-100" type="button">
+              Join The Club <i class="fas fa-arrow-right ml-1"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Bottom Bar -->
+      <div class="footer-bottom-bar">
+        <div>
+          &copy; 2026 KicksHub Shoe Shop. All Rights Reserved. Crafted for sneaker enthusiasts.
+        </div>
+        <div class="d-flex align-items-center gap-3">
+          <span class="mr-3"><i class="fas fa-shield-alt text-success mr-1"></i> 100% Authentic Guarantee</span>
+          <span class="mr-3"><i class="fas fa-truck text-primary mr-1"></i> Free Global Express</span>
+          <span><i class="fas fa-lock text-warning mr-1"></i> Encrypted Checkout</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </div>

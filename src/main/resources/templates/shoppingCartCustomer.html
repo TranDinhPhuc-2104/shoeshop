@@ -1,66 +1,111 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-   <head>
-      <meta charset="UTF-8">
-      <title>Shoe Shop Online</title>
-      <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
-      <th:block th:include="_header"></th:block>
-   </head>
-   <body>
-      
-      <th:block th:include="_menu"></th:block>
-       
-      <div class="container">
-      	<div class="row">
-      		<div class="col-lg-6 offset-3">
-       
-       <div class="bd-example">
-      <h3>Enter Customer Information</h3>
-       <form method="POST" th:object = "${customerForm}" th:action="@{/shoppingCartCustomer}">
-		  <div class="form-group">
-		    <label for="exampleInputEmail1">CustomerName</label>
-		    <input type="text" class="form-control" id="exampleInputEmail1" th:field="*{name}">
-		    <span class="error-message"
-                     th:if="${#fields.hasErrors('name')}" th:errors="*{name}">..</span>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="exampleInputEmail1">Email</label>
-		    <input type="email" class="form-control" id="exampleInputEmail1" th:field="*{email}">
-		    <span class="error-message"
-                     th:if="${#fields.hasErrors('email')}" th:errors="*{email}">..</span>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="exampleInputEmail1">Phone</label>
-		    <input type="text" class="form-control" id="exampleInputEmail1" th:field="*{phone}">
-		    <span class="error-message"
-                     th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">..</span>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="exampleInputPassword1">Address</label>
-		    <textarea th:field="*{address}" class="form-control"></textarea>
-		    <span class="error-message"
-                     th:if="${#fields.hasErrors('address')}" th:errors="*{address}">..</span>
-		    
-		  </div>
-		 
-		  <input type="submit" value="Submit" class="btn btn-primary"/> 
-		  <input type="reset" class="btn btn-outline-primary"
-                  value="Reset" />
-		</form>
+<head>
+  <meta charset="UTF-8">
+  <title>Shipping Information | KicksHub</title>
+  <th:block th:include="_header"></th:block>
+</head>
+<body>
+  <div class="main-content">
+    <th:block th:include="_menu"></th:block>
 
-      
+    <div class="cart-page-section">
+      <div class="container">
+        
+        <!-- Checkout Steps Nav -->
+        <div class="cart-steps-nav">
+          <div class="cart-step-item completed">
+            <span class="cart-step-num"><i class="fas fa-check"></i></span>
+            <span>1. Bag</span>
+          </div>
+          <div class="cart-step-divider"></div>
+          <div class="cart-step-item active">
+            <span class="cart-step-num">2</span>
+            <span>Customer Info</span>
+          </div>
+          <div class="cart-step-divider"></div>
+          <div class="cart-step-item">
+            <span class="cart-step-num">3</span>
+            <span>Review & Confirm</span>
+          </div>
+        </div>
+
+        <!-- Form Card Container -->
+        <div class="row justify-content-center">
+          <div class="col-lg-7 col-md-9">
+            <div class="form-card-modern">
+              <div class="mb-4 pb-2 border-bottom">
+                <h3 class="font-weight-bold mb-1" style="font-size: 1.6rem;">Shipping Details</h3>
+                <p class="text-muted small mb-0">Please enter your delivery address and contact information for order dispatch.</p>
+              </div>
+
+              <form method="POST" th:object="${customerForm}" th:action="@{/shoppingCartCustomer}">
+                <!-- Customer Name -->
+                <div class="form-group-modern">
+                  <label class="form-label-modern" for="custName">Full Name *</label>
+                  <div class="input-with-icon">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="custName" class="form-control-modern" 
+                           placeholder="John Doe" th:field="*{name}"
+                           th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''">
+                  </div>
+                  <span class="error-message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name is required</span>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group-modern">
+                  <label class="form-label-modern" for="custEmail">Email Address *</label>
+                  <div class="input-with-icon">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="custEmail" class="form-control-modern" 
+                           placeholder="john@example.com" th:field="*{email}"
+                           th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : ''">
+                  </div>
+                  <span class="error-message" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Valid email is required</span>
+                </div>
+
+                <!-- Phone -->
+                <div class="form-group-modern">
+                  <label class="form-label-modern" for="custPhone">Phone Number *</label>
+                  <div class="input-with-icon">
+                    <i class="fas fa-phone"></i>
+                    <input type="tel" id="custPhone" class="form-control-modern" 
+                           placeholder="+1 (555) 019-2834" th:field="*{phone}"
+                           th:classappend="${#fields.hasErrors('phone')} ? 'is-invalid' : ''">
+                  </div>
+                  <span class="error-message" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone number is required</span>
+                </div>
+
+                <!-- Shipping Address -->
+                <div class="form-group-modern">
+                  <label class="form-label-modern" for="custAddress">Shipping Address *</label>
+                  <div class="input-with-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <textarea id="custAddress" class="form-control-modern" rows="3" 
+                              placeholder="123 Sneaker St, Apt 4B, City, Country" th:field="*{address}"
+                              th:classappend="${#fields.hasErrors('address')} ? 'is-invalid' : ''"></textarea>
+                  </div>
+                  <span class="error-message" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Address is required</span>
+                </div>
+
+                <!-- Actions -->
+                <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mt-4 pt-3 border-top">
+                  <a th:href="@{/shoppingCart}" class="btn-modern btn-modern-outline">
+                    <i class="fas fa-arrow-left mr-1"></i> Back to Bag
+                  </a>
+                  <button type="submit" class="btn-modern btn-modern-primary">
+                    Review Order <i class="fas fa-arrow-right ml-1"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
       </div>
-       </div>
-      	</div>
-      </div> 
-      
-      <!-- ------------------------------container end---------------------------------- -->
-      
-       
-      <th:block th:include="_footer"></th:block>
-       
-   </body>
-</html></html>
+    </div>
+  </div>
+
+  <th:block th:include="_footer"></th:block>
+</body>
+</html>

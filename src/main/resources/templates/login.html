@@ -1,143 +1,145 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-   <head>
-      <meta charset="UTF-8">
-      <title>Shoe Shop Online</title>
-      <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
-      <th:block th:include="_header"></th:block>
-   </head>
-   <style type="text/css">
-      .spring-btn-black{
-            clear:both; background: #000; border: none; color: #fff; font-size: 1em; padding: 10px; cursor: pointer; font-size: 17px;
-      }
-      
-    a:hover{
-        color: #fff;
-        font-weight: bold;
-      }
-      h1{
-        font-weight: bold;
-        margin-bottom: 2rem;
-      }
-      .container{
-        color: #000;
-      }
-      ul li {
-        list-style: none;
-        margin: 0.5rem;
-      }
+<head>
+  <meta charset="UTF-8">
+  <title>Sign In | KicksHub</title>
+  <th:block th:include="_header"></th:block>
+</head>
+<body>
+  <div class="main-content">
+    <th:block th:include="_menu"></th:block>
 
-      #spring_col1{
-        color: #000;
-      }
-      #spring_col1 a{
-        color: #000;
-        text-decoration: underline;
-      }
-
-      #spring_col1 a:hover{
-        color: #fff;
-        background-color: #000;
-
-      }
-      
-      html, body{
-	height: 100%;
-	font-family: 'Lato', sans-serif;
-	font-family: 'Open Sans', sans-serif;
-	font-family: 'Abel', sans-serif;
-}
-  </style>
-   <body>
-      
-      <th:block th:include="_menu"></th:block>
-      
+    <div class="auth-page-section">
       <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-sm-8 col-xs-12">
-                <section id="spring_col1">
-                <h1>LOG IN</h1>
-                    
-                <a href="">Forgot Your Password?</a>
-                
-                <!-- /login?error=true -->
-         <th:block th:if="${#session != null && #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}">
-             <div th:if= "${#request.getParameter('error') == 'true'}"
-                style="color: red; margin: 10px 0px;">
-                Login Failed!!!<br /> Reason :
-                <span th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}"></span>
-             </div>
-         </th:block>
-
-                <form method="POST" th:action="@{/j_spring_security_check}">
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Username</label>
-                    <input type="text" name="userName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-                  </div>
-                  <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                  </div>
-                  <button type="submit" class="spring-btn-black">LOG IN <span class="fa fa-arrow-right" style="margin-left: 9px;"></span></button>
-				
-                </form>
-                
-                <span class="error-message" th:utext="${error}"></span>
-
-                <br><br>
-
-                By clicking 'Log In' you agree to our website <a href="">Creators Club Terms & Conditions </a>,  <a href="">Spring Privacy Notice</a> and  <a href="">Terms & Conditions</a>.
-
-               <!--  ----------- form end -------------- -->
-
-
-               </section>
-                <div style="text-align:left">
-          <h3>User/Password:</h3>
-          <ul>        
-             <li>employee1/123</li>
-             <li>manager1/123</li>   
-          </ul>
-            </div>
-            </div>
+        <div class="row justify-content-center">
+          <div class="col-lg-10 col-xl-9">
             
-            <div class="col-lg-6 col-sm-4 col-xs-12">
+            <div class="auth-card-modern">
+              <div class="row no-gutters">
                 
-                <h1>JOIN THE CLUB. GET REWARDED.</h1>
-                    Join the adidas Creators Club membership program:
-                  <ul >
-                      <li ><i class="fas fa-check"></i> Get immediate access to all Challenger level rewards</li>
-                      <li><i class="fas fa-check"></i> Earn access to shop limited edition products</li>
-                      <li ><i class="fas fa-check"></i> Level up for exclusive access to sport, yoga and music events</li>
-                      <li ><i class="fas fa-check"></i> Receive our best special offers and promotions</li>
-                     
-                    </ul>  
+                <!-- Left: Login Form -->
+                <div class="col-lg-6 auth-form-side">
+                  <div class="mb-4">
+                    <div class="brand-logo mb-3">
+                      <span class="brand-icon-box" style="width: 36px; height: 36px; font-size: 0.95rem;">
+                        <i class="fas fa-shoe-prints"></i>
+                      </span>
+                      <span>KICKS<span class="brand-highlight">HUB</span></span>
+                    </div>
+                    <h3 class="font-weight-bold mb-1" style="font-size: 1.7rem;">Welcome Back</h3>
+                    <p class="text-muted small">Sign in to access your orders and management dashboard.</p>
+                  </div>
 
-                    Join now and start earning points to access new levels and rewards. It's time to unlock the best of adidas.
-                    <br><br>
-                <a href=""  class="spring-btn-black" />JOIN THE CLUB <span class="fa fa-arrow-right" style="margin-left: 9px;"></span></a>
+                  <!-- Error Alert -->
+                  <div th:if="${#session != null && #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null && #request.getParameter('error') == 'true'}"
+                       class="alert alert-danger d-flex align-items-center gap-2 p-3 rounded-lg mb-4" role="alert">
+                    <i class="fas fa-exclamation-circle text-danger mr-2" style="font-size: 1.2rem;"></i>
+                    <div class="small">
+                      <strong>Login Failed:</strong>
+                      <span th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">Invalid credentials</span>
+                    </div>
+                  </div>
 
-                <br><br>
+                  <!-- Login Form -->
+                  <form method="POST" th:action="@{/j_spring_security_check}">
+                    <div class="form-group-modern">
+                      <label class="form-label-modern" for="loginUser">Username</label>
+                      <div class="input-with-icon">
+                        <i class="fas fa-user"></i>
+                        <input type="text" name="userName" id="loginUser" class="form-control-modern" 
+                               placeholder="Enter username" required autofocus>
+                      </div>
+                    </div>
 
-                <img src="https://account-frontends.adidas.com/account_account-portal/1.0.0-experimental.14/assets/adiclub-blue-desktop.e34c412f9253e8d5.svg">
-            
-                
+                    <div class="form-group-modern">
+                      <label class="form-label-modern" for="loginPass">Password</label>
+                      <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" name="password" id="loginPass" class="form-control-modern" 
+                               placeholder="Enter password" required>
+                      </div>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="rememberMe">
+                        <label class="custom-control-label small text-muted" for="rememberMe">Remember me</label>
+                      </div>
+                      <a href="#" class="small text-muted">Forgot password?</a>
+                    </div>
+
+                    <button type="submit" class="btn-modern btn-modern-primary w-100">
+                      Sign In <i class="fas fa-arrow-right ml-1"></i>
+                    </button>
+                  </form>
+
+                  <!-- Demo Credentials Quick Access -->
+                  <div class="demo-credentials-card">
+                    <h6><i class="fas fa-key text-warning mr-1"></i> Demo Accounts</h6>
+                    <div class="d-flex flex-wrap gap-2">
+                      <span class="demo-pill" title="Employee Account">
+                        <strong>employee1</strong> / 123 (Staff)
+                      </span>
+                      <span class="demo-pill" title="Manager Account">
+                        <strong>manager1</strong> / 123 (Admin)
+                      </span>
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- Right: Brand Info & Club Perks -->
+                <div class="col-lg-6 auth-brand-side d-none d-lg-flex">
+                  <div class="position-relative" style="z-index: 2;">
+                    <span class="badge badge-warning font-weight-bold px-3 py-1 mb-3 text-uppercase">
+                      VIP Creators Club
+                    </span>
+                    <h3 class="font-weight-bold text-white mb-2" style="font-size: 1.9rem; line-height: 1.2;">
+                      UNLOCK EXCLUSIVE SNEAKER DROPS
+                    </h3>
+                    <p class="text-light opacity-75 small">
+                      Join members around the globe who get priority access to restricted releases and special promotions.
+                    </p>
+
+                    <ul class="auth-perk-list">
+                      <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span>Early reservation on high-heat sneaker launches</span>
+                      </li>
+                      <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span>Free express shipping on all VIP orders</span>
+                      </li>
+                      <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span>Exclusive member-only pricing & secret discounts</span>
+                      </li>
+                      <li>
+                        <i class="fas fa-check-circle"></i>
+                        <span>24/7 dedicated sneakerhead concierge service</span>
+                      </li>
+                    </ul>
+
+                    <div class="mt-4 pt-3 border-top border-secondary">
+                      <div class="d-flex align-items-center gap-3">
+                        <div class="text-warning">
+                          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <span class="text-light small font-weight-bold">Trusted by 50,000+ Sneakerheads</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
             </div>
+
+          </div>
         </div>
+      </div>
     </div>
-    
+  </div>
 
-        <!-- ------------------------------Login page end---------------------------------- -->
-      
-       
-   
-       
-      <th:block th:include="_footer"></th:block>
-       
-   </body>
+  <th:block th:include="_footer"></th:block>
+</body>
 </html>

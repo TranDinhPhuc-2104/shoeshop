@@ -1,20 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-   <head>
-      <meta charset="UTF-8">
-      <title>Access Denied</title>
-      <link rel="stylesheet" type="text/css" th:href="@{/styles.css}">
-   </head>
-    
-   <body>
-    
-      <th:block th:include="_header"></th:block>
-      <th:block th:include="_menu"></th:block>
-       
-      <div class="page-title">Access Denied!</div>
-      <h3 style="color:red;">Sorry, you can not access this page!</h3>
-       
-      <th:block th:include="_footer"></th:block>
-       
-   </body>
-</html>>
+<head>
+  <meta charset="UTF-8">
+  <title>Access Denied (403) | KicksHub</title>
+  <th:block th:include="_header"></th:block>
+</head>
+<body>
+  <div class="main-content">
+    <th:block th:include="_menu"></th:block>
+
+    <div class="container py-5 text-center">
+      <div class="form-card-modern mx-auto my-5 py-5" style="max-width: 580px;">
+        <div class="text-danger mb-3" style="font-size: 3.5rem;">
+          <i class="fas fa-shield-virus"></i>
+        </div>
+        
+        <h2 class="font-weight-bold mb-2" style="font-size: 2.2rem;">403 - Access Restricted</h2>
+        
+        <p class="text-muted mb-4">
+          Sorry, you do not have the required permissions or user role to view this restricted page. If you believe this is an error, please sign in with an authorized manager account.
+        </p>
+
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+          <a th:href="@{/}" class="btn-modern btn-modern-primary">
+            <i class="fas fa-home mr-1"></i> Return Home
+          </a>
+          <a th:href="@{/admin/login}" class="btn-modern btn-modern-outline">
+            <i class="fas fa-sign-in-alt mr-1"></i> Sign In as Admin
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <th:block th:include="_footer"></th:block>
+</body>
+</html>

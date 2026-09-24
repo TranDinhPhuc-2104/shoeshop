@@ -1,290 +1,325 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-   <head>
-      <meta charset="UTF-8">
-      <title>Shoe Shop Online</title>
-      <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
-      <link rel="icon" th:href="@{/}" type="image/x-icon">
-      <th:block th:include="_header"></th:block>
-   </head>
-   <body>
-      
-      <th:block th:include="_menu"></th:block>
-       
-      <section id="spring1">
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-  </ol>
+<head>
+  <meta charset="UTF-8">
+  <title>KicksHub | Modern Sneaker & Footwear Store</title>
+  <th:block th:include="_header"></th:block>
+</head>
+<body>
+  <div class="main-content">
+    <th:block th:include="_menu"></th:block>
 
-  <div class="carousel-inner">
-    
-
-     
-    <div class="carousel-item active">
-      <video loop="" autoplay="" playsinline="" src="https://brand.assets.adidas.com/video/upload/q_auto,vc_auto/video/upload/global%20brand%20publishing/Running/Faster%20Than/running-ss20-faster-than-launch-hp-masthead-small-ub20-d.mp4" style=" width: 100%;" ></video>
-      
-      <div class="carousel-caption d-none d-md-block">
-    <h1 style="font-size: 50px; font-weight: 900; margin-bottom: 140px; margin-right: 600px; color: #000;">ULTRABOOST 20 <br>
-<p style="font-size: 1rem; color: #000;">Iconic Boost. Outrageous energy return. Bold new colors.<br> Hello, Ultraboost 20.</p>
- <a href=""  style="clear:both; background: #000; border: none; color: #fff; font-size: 1em; padding: 10px; cursor: pointer; font-size: 17px;" />SHOP MEN <span class="fa fa-arrow-right" style="margin-left: 9px;"></span></a>
-    </h1>
-    
-  </div>
-    </div>
-   
-  </div>
-  
-</div>
-</section>
-<br>
-
-<!-- ------------------------------section end---------------------------------- -->
-  
-      <!-- ------------------------------section end---------------------------------- -->
-      <section id="product_sec">
-         <div class="row">
-           <div class="col-lg-3">
-             <img src="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/esMX/Images/Teaser-EG4958-DT_tcm217-455182.jpg">
-             
-           </div>
-
-           <div class="col-lg-3">
-             <img src="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/esMX/Images/Teaser-EG1144-DT_tcm217-467995.jpg">
-           </div>
-
-           <div class="col-lg-3">
-             <img src="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/esMX/Images/Teaser-FJ9352-DT_tcm217-468023.jpg">
-           </div>
-
-           <div class="col-lg-3">
-             <img src="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/esMX/Images/Teaser-B37681-DT_tcm217-468028.jpg">
-           </div>
-         </div>
-      </section>
-
-
-<!-- ------------------------------carousel end---------------------------------- -->
-<!-- {{-- ======================= start of addias 2 ==================== --}} -->
-    <div class="row">
-        <div class="col-md-6 col-xs-12 col-sm-12">
-            <img src="https://brand.assets.adidas.com/image/upload/f_auto,q_auto,fl_lossy/enUS/Images/training-ss20-IWD2020-tease-hp-teaser-large-v1-d_tcm221-454500.jpg" width="700px" height="500px" style="margin-left: 50px">
-              <div class="container">
-          <div class="carousel-caption">
-            <h2>PLAY YOUR WAY</h2>
-            <p>Designed for those who reimagine sport.</p>
-            <p><a class="btn btn-lg btn-dark" href="#" role="button">SHOP NOW <i class="fa fa-arrow-right"></i></a></p>
-          </div>
-        </div>
-        </div>
-        <div class="col-md-6 col-xs-12 col-sm-12">
-            <img src="https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/a39555ccb43d46dc90f8f0c43ba30c66_9366/ADIZERO_SL_trang_ID6924_HM1.jpg" width="700px" height="500px">
-              <div class="container">
-          <div class="carousel-caption">
-            <h2>WORK IT OUTSIDE</h2>
-            <p>Get inspired to bootcamp equipment-free in high support tights.</p>
+    <!-- =================================================================
+         HERO SECTION
+         ================================================================= -->
+    <section class="hero-sneaker-section">
+      <div class="hero-glow-blob"></div>
+      <div class="container position-relative">
+        <div class="row align-items-center">
+          <!-- Hero Text -->
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="hero-pill-badge">
+              <span class="dot"></span>
+              <span>New Season Drop &bull; 2026 Edition</span>
+            </div>
             
-            <p><a class="btn btn-lg btn-dark" href="#" role="button">SHOP NOW <i class="fa fa-arrow-right"></i></a></p>
+            <h1 class="hero-title">
+              STEP INTO THE <br>
+              <span class="gradient-text">FUTURE</span> OF FOOTWEAR
+            </h1>
+
+            <p class="hero-subtitle">
+              Engineered for extreme performance, iconic street aesthetics, and unmatched comfort. Discover curated, 100% authentic sneaker releases.
+            </p>
+
+            <div class="hero-actions">
+              <a th:href="@{/productList}" class="btn-modern btn-modern-primary btn-modern-lg">
+                Explore Collection <i class="fas fa-arrow-right ml-1"></i>
+              </a>
+              <a th:href="@{/shoppingCart}" class="btn-modern btn-modern-outline-white btn-modern-lg">
+                <i class="fas fa-shopping-bag mr-1"></i> View Cart
+              </a>
+            </div>
+
+            <!-- Stats -->
+            <div class="hero-stats-row">
+              <div class="hero-stat-item">
+                <h4>50K+</h4>
+                <p>Authentic Pairs</p>
+              </div>
+              <div class="hero-stat-item">
+                <h4>4.9 ★</h4>
+                <p>Customer Rating</p>
+              </div>
+              <div class="hero-stat-item">
+                <h4>100%</h4>
+                <p>Verified Genuine</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Showcase Image -->
+          <div class="col-lg-6">
+            <div class="hero-image-wrapper">
+              <div class="hero-main-img-card">
+                <img src="https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=1000&q=80" 
+                     alt="Premium Ultraboost Sneaker"
+                     onerror="this.onerror=null;this.src='img/main.jpg';">
+                
+                <!-- Floating Info Badge -->
+                <div class="hero-floating-tag">
+                  <div class="tag-icon">
+                    <i class="fas fa-bolt"></i>
+                  </div>
+                  <div class="tag-info">
+                    <h6>Air & Boost Tech</h6>
+                    <p>Maximum Energy Return &bull; $160</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        </div>
-    </div>
+      </div>
+    </section>
 
+    <!-- =================================================================
+         PERKS & VALUE PROPOSITIONS
+         ================================================================= -->
+    <section class="perks-section">
+      <div class="container">
+        <div class="row g-3">
+          <div class="col-lg-3 col-md-6 mb-3 mb-lg-0">
+            <div class="perk-card">
+              <div class="perk-icon-box">
+                <i class="fas fa-truck-fast"></i>
+              </div>
+              <div class="perk-content">
+                <h6>Free Express Delivery</h6>
+                <p>On all domestic orders over $99 with live tracking</p>
+              </div>
+            </div>
+          </div>
 
-    <br><br>
-    <!-- {{-- ======================= end of addias 2 ==================== --}} -->
+          <div class="col-lg-3 col-md-6 mb-3 mb-lg-0">
+            <div class="perk-card">
+              <div class="perk-icon-box">
+                <i class="fas fa-certificate"></i>
+              </div>
+              <div class="perk-content">
+                <h6>100% Verified Authentic</h6>
+                <p>Hand-checked and verified genuine by footwear pros</p>
+              </div>
+            </div>
+          </div>
 
+          <div class="col-lg-3 col-md-6 mb-3 mb-lg-0">
+            <div class="perk-card">
+              <div class="perk-icon-box">
+                <i class="fas fa-rotate-left"></i>
+              </div>
+              <div class="perk-content">
+                <h6>30-Day Easy Returns</h6>
+                <p>Hassle-free exchanges or full refund within 30 days</p>
+              </div>
+            </div>
+          </div>
 
-
-
-<!-- ------------------------------Offer end---------------------------------- -->
-<section id="about">
-  <div class="section-content">
-    <div class="container">
-
-      <div class="col-md-6">
-        <div class="about-text">
-          <h3>About me</h3>
-          <p class="lead">Hello,I'm Mạnh, a DevOps engineer. 
-            I'm excited to share a fantastic project with you - a completely free online shop. 
-            I've gathered a collection of resources to make online shopping accessible to all. 
-            Explore and enjoy the convenience without any cost.Welcome aboard!
-        </p>
-
-        <h5>Follow me</h5>
-        <a href="" class="btn btn-sm btn-outline-light">Facebook</a>
-        <a href="" class="btn btn-sm btn-outline-light">Twitter</a>
-        <a href="" class="btn btn-sm btn-outline-light">Github</a>
-
-        </div>
-      </div> 
-    </div>
-  </div>
-</section>
-
-<!-- ------------------------------About end---------------------------------- -->
-<section id="restaurants_bars">
-  <div class="section-content">
-    <div class="container">
-      <h2 class="h2_offer">RESTAURANTS & BARS</h2>
-      <hr>
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="card-columns">
-  <div class="card">
-    <img src="https://d2e5ushqwiltxm.cloudfront.net/wp-content/uploads/sites/178/2019/03/12021201/NovotelYangonMax-restaurants_barssession-royalpavilionchineserestaurant-photo1.jpg" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title that wraps to a new line</h5>
-      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-    </div>
-  </div>
-  <div class="card p-3">
-
-    <blockquote class="blockquote mb-0 card-body">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-      <footer class="blockquote-footer">
-        <small class="text-muted">
-          Someone famous in <cite title="Source Title">Source Title</cite>
-        </small>
-      </footer>
-    </blockquote>
-  </div>
-  <div class="card">
-    <img src="https://d2e5ushqwiltxm.cloudfront.net/wp-content/uploads/sites/178/2019/03/11094953/NovotelYangonMax-restaurants_barssession-lecellier-photo1.jpg" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-
-  <div class="card text-white text-center p-3" style="background: #000;">
-    <blockquote class="blockquote mb-0">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat.</p>
-      <footer class="blockquote-footer text-white">
-        <small>
-          Someone famous in <cite title="Source Title">Source Title</cite>
-        </small>
-      </footer>
-    </blockquote>
-  </div>
-
-  <div class="card text-center">
-    <img src="https://d2e5ushqwiltxm.cloudfront.net/wp-content/uploads/sites/178/2019/03/12023336/barcodektvphoto1.jpg" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This card has a regular title and short paragraphy of text below it.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-
-  <div class="card">
-    <img src="https://d2e5ushqwiltxm.cloudfront.net/wp-content/uploads/sites/178/2019/03/11095355/takumiyajapanesephoto1.jpg" class="card-img-top" alt="...">
-  </div>
-
-  <div class="card p-3 text-right text-white" style="background: #000;">
-    <blockquote class="blockquote mb-0">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-      <footer class="blockquote-footer">
-        <small class="text-muted">
-          Someone famous in <cite title="Source Title">Source Title</cite>
-        </small>
-      </footer>
-    </blockquote>
-  </div>
-
-  <div class="card">
-    <img src="https://d2e5ushqwiltxm.cloudfront.net/wp-content/uploads/sites/178/2019/05/20071244/In-room-dining2.jpg" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is another card with title and supporting text below. This card has some additional content to make it slightly taller overall.</p>
-      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    </div>
-  </div>
-</div>
+          <div class="col-lg-3 col-md-6">
+            <div class="perk-card">
+              <div class="perk-icon-box">
+                <i class="fas fa-headset"></i>
+              </div>
+              <div class="perk-content">
+                <h6>24/7 VIP Support</h6>
+                <p>Instant sneaker consultation & customer service</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-  
-<footer id="footer-sub">
-  <div class="container">
-    <!-- <div class="row">
-      <div class="col-sm-8">
-          <img src="https://novotelyangonmax.com/wp-content/themes/novotel-template/images/logo/logo-novotel.svg">
+    </section>
 
-          <img src="img/logo_m_global.png">
-
-          <img src="img/Pan-Pacific-Yangon-Hor.svg">
-
-
-       </div>
-       <div class="col-sm-4">
-
-
-       </div>
-    </div> -->
-  </div>
-</footer>
-
-<!-- ------------------------------footer sub end---------------------------------- -->
-
-  <footer id="footer-main">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-3">
-            <img src=""><br>
-
-            <h6 class="mt-3">shoe shop</h6>
-            <p>
-              
-              Contact<br>
-              shoeshop@gmail.com
-            </p>
+    <!-- =================================================================
+         CURATED CATEGORIES
+         ================================================================= -->
+    <section class="py-5 my-3">
+      <div class="container">
+        <div class="section-header-modern">
+          <span class="section-tag">Curated Drops</span>
+          <h2 class="section-title">Shop by Category</h2>
+          <p class="section-desc">Find the perfect silhouette for your lifestyle, workout, or street style.</p>
         </div>
-        <div class="col-sm-3">
-          
-        </div>
-        <div class="col-sm-3">
-          <a href="">About Shoe Shop</a>
-          <a href="">Shoe Shop Brands</a>
-          <a href="">News</a>
-          <a href="">Awards</a>
-          <a href="">Gallery</a>
-          <a href="">Sitemap</a>
-        </div>
-        <div class="col-sm-3">
-          <a href="">Voice of Customer</a>
-          <a href="">Contacts by Branch</a>
-          <a href="">Ethics Reporting</a>
-          <a href="">Careers</a>
 
-          <br><br>
-          <a href="">Business Inquiry</a>
-          <br>
-          <a href="" class="ico"><i class="fab fa-apple fa-2x"></i> Apple Store</a>
-          <a href="" class="ico"><i class="fab fa-google-play fa-2x"></i> Google Play</a>
+        <div class="row">
+          <!-- Running -->
+          <div class="col-md-4">
+            <a th:href="@{/productList(name='Running')}" class="text-decoration-none">
+              <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=80" alt="Running Shoes">
+                <div class="category-overlay">
+                  <h4>Running & Performance</h4>
+                  <p>Cushioned responsive speed for athletes</p>
+                  <span class="category-link-arrow">Shop Running <i class="fas fa-arrow-right"></i></span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Streetwear / Lifestyle -->
+          <div class="col-md-4">
+            <a th:href="@{/productList(name='Originals')}" class="text-decoration-none">
+              <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1607522370275-f14206abe5d3?auto=format&fit=crop&w=700&q=80" alt="Lifestyle Sneakers">
+                <div class="category-overlay">
+                  <h4>Streetwear & Lifestyle</h4>
+                  <p>Iconic silhouettes designed for everyday wear</p>
+                  <span class="category-link-arrow">Shop Lifestyle <i class="fas fa-arrow-right"></i></span>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Basketball / High Tops -->
+          <div class="col-md-4">
+            <a th:href="@{/productList(name='Air')}" class="text-decoration-none">
+              <div class="category-card">
+                <img src="https://images.unsplash.com/photo-1579338559194-a162d19bf842?auto=format&fit=crop&w=700&q=80" alt="Basketball High Tops">
+                <div class="category-overlay">
+                  <h4>Basketball & High-Tops</h4>
+                  <p>Ankle stability, air bounce & court supremacy</p>
+                  <span class="category-link-arrow">Shop Court <i class="fas fa-arrow-right"></i></span>
+                </div>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
-      <hr>
-      <div class="row">
-        <!-- <div class="col-sm-6">
-          <img src="img/footer-img-lottedfs.png">
-          <img src="img/footer-img-skyhill.png">
-          <img src="img/footer-brand-resort.png">
-        </div> -->
-        <div class="col-sm-6">
-          
+    </section>
+
+    <!-- =================================================================
+         FLAGSHIP PROMO BANNER
+         ================================================================= -->
+    <section class="promo-banner-section">
+      <div class="container">
+        <div class="promo-card">
+          <div class="row align-items-center">
+            <div class="col-lg-7 promo-card-content">
+              <span class="section-tag" style="background: rgba(255,71,66,0.2); color: #ff6b4a;">Tech Innovation</span>
+              <h3>NEXT-GEN CUSHIONING.<br>UNSTOPPABLE MOMENTUM.</h3>
+              <p>
+                Experience ultra-responsive energy return with advanced foam soles and breathable knitted uppers. Built for runners who demand the absolute best in durability and style.
+              </p>
+              <div class="d-flex flex-wrap gap-3">
+                <a th:href="@{/productList}" class="btn-modern btn-modern-primary">
+                  Shop The Release <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+                <a th:href="@{/shoppingCart}" class="btn-modern btn-modern-outline-white">
+                  Check Cart
+                </a>
+              </div>
+            </div>
+            <div class="col-lg-5 text-center mt-4 mt-lg-0">
+              <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=700&q=80" 
+                   alt="Featured Sneaker" 
+                   style="max-height: 340px; border-radius: 16px; object-fit: cover; box-shadow: 0 15px 35px rgba(0,0,0,0.5);">
+            </div>
+          </div>
         </div>
-        <hr>
-        <a href="" style="margin-left: 1rem">Privacy Policy | Shoe Shop Rewards Terms of Use</a>
       </div>
-    </div>
-  </footer>
-<!-- ------------------------------footer end---------------------------------- -->
-       
-      <th:block th:include="_footer"></th:block>
-       
-   </body>
+    </section>
+
+    <!-- =================================================================
+         BRAND PARTNERS TICKER
+         ================================================================= -->
+    <section class="brand-ticker-bar">
+      <div class="container text-center">
+        <p class="small text-uppercase font-weight-bold text-muted mb-3" style="letter-spacing: 0.1em;">Official Stockist of Premium Brands</p>
+        <div class="brand-pills-row">
+          <span class="brand-logo-item">NIKE</span>
+          <span class="brand-logo-item">ADIDAS</span>
+          <span class="brand-logo-item">JORDAN</span>
+          <span class="brand-logo-item">NEW BALANCE</span>
+          <span class="brand-logo-item">PUMA</span>
+          <span class="brand-logo-item">ASICS</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================
+         COMMUNITY REVIEWS
+         ================================================================= -->
+    <section class="py-5 my-4">
+      <div class="container">
+        <div class="section-header-modern">
+          <span class="section-tag">Customer Love</span>
+          <h2 class="section-title">Sneakerhead Reviews</h2>
+          <p class="section-desc">Join thousands of collectors and athletes who trust KicksHub for every drop.</p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 mb-4 mb-md-0">
+            <div class="perk-card flex-column text-left p-4 h-100">
+              <div class="text-warning mb-2">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+              <h6 class="font-weight-bold mb-2">"Flawless authenticity & fast delivery"</h6>
+              <p class="text-muted small mb-3">
+                "Ordered the Ultraboosts and they arrived double-boxed within 2 days. The authenticity tags and quality check were spot on."
+              </p>
+              <div class="mt-auto d-flex align-items-center gap-2">
+                <div class="user-avatar-circle" style="width: 32px; height: 32px;">M</div>
+                <div>
+                  <div class="font-weight-bold small text-dark">Marcus T.</div>
+                  <div class="text-muted" style="font-size: 0.72rem;"><i class="fas fa-check-circle text-success"></i> Verified Buyer</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-4 mb-md-0">
+            <div class="perk-card flex-column text-left p-4 h-100">
+              <div class="text-warning mb-2">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+              <h6 class="font-weight-bold mb-2">"Best sneakers in my collection"</h6>
+              <p class="text-muted small mb-3">
+                "The shopping experience was super smooth. Easy checkout, accurate sizing chart, and gorgeous presentation. 10/10 recommend."
+              </p>
+              <div class="mt-auto d-flex align-items-center gap-2">
+                <div class="user-avatar-circle" style="width: 32px; height: 32px; background: #3b82f6;">E</div>
+                <div>
+                  <div class="font-weight-bold small text-dark">Elena R.</div>
+                  <div class="text-muted" style="font-size: 0.72rem;"><i class="fas fa-check-circle text-success"></i> Verified Buyer</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="perk-card flex-column text-left p-4 h-100">
+              <div class="text-warning mb-2">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              </div>
+              <h6 class="font-weight-bold mb-2">"Incredible comfort for running"</h6>
+              <p class="text-muted small mb-3">
+                "I run 20 miles a week. These kicks have saved my knees and improved my stride. Will definitely be getting my next pair here!"
+              </p>
+              <div class="mt-auto d-flex align-items-center gap-2">
+                <div class="user-avatar-circle" style="width: 32px; height: 32px; background: #10b981;">D</div>
+                <div>
+                  <div class="font-weight-bold small text-dark">David K.</div>
+                  <div class="text-muted" style="font-size: 0.72rem;"><i class="fas fa-check-circle text-success"></i> Verified Buyer</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- main-content end -->
+
+  <th:block th:include="_footer"></th:block>
+</body>
 </html>

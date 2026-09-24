@@ -5,7 +5,8 @@ COPY . .
 RUN mvn install -DskipTests=true
 
 # Run stage
-FROM amazoncorretto:8-al2-generic-jdk
+FROM alpine:3.19
+RUN apk add openjdk8
 WORKDIR /run
 COPY --from=build /app/target/shoe-ShoppingCart-0.0.1-SNAPSHOT.jar /run/shoe-ShoppingCart-0.0.1-SNAPSHOT.jar 
 EXPOSE 8011

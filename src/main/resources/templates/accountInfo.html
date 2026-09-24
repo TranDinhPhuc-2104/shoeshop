@@ -1,28 +1,71 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-   <head>
-      <meta charset="UTF-8">
-      <title>Shoe Shop Online</title>
-      <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
-      <th:block th:include="_header"></th:block>
-   </head>
-   <body>
-      
-      <th:block th:include="_menu"></th:block>
-      <div class="page-title">Account Info</div>
-      <div class="account-container">
-         <ul>
-            <li>User Name: <span th:utext="${#request.userPrincipal.name}"></span></li>
-            <li>
-               Role:
-               <ul>
-                  <li th:each="auth : ${userDetails.authorities}" th:utext="${auth.authority}"></li>
-               </ul>
-            </li>
-         </ul>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+  <meta charset="UTF-8">
+  <title>Account Profile | KicksHub</title>
+  <th:block th:include="_header"></th:block>
+</head>
+<body>
+  <div class="main-content">
+    <th:block th:include="_menu"></th:block>
+
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+          
+          <div class="form-card-modern text-center">
+            
+            <!-- User Avatar -->
+            <div class="user-avatar-circle mx-auto mb-3" style="width: 72px; height: 72px; font-size: 1.8rem;">
+              <i class="fas fa-user"></i>
+            </div>
+
+            <h3 class="font-weight-bold mb-1" th:utext="${#request.userPrincipal.name}">Username</h3>
+            <p class="text-muted small mb-3">Authenticated Store User</p>
+
+            <!-- Roles List -->
+            <div class="mb-4">
+              <span class="text-muted small d-block mb-2 font-weight-bold text-uppercase">Assigned Roles</span>
+              <div class="d-flex justify-content-center flex-wrap gap-2">
+                <span class="badge badge-primary px-3 py-2 font-weight-bold" 
+                      th:each="auth : ${userDetails.authorities}" 
+                      th:utext="${auth.authority}">ROLE_USER</span>
+              </div>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- Admin Quick Links -->
+            <div class="d-flex flex-column gap-2 text-left mb-4">
+              <th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
+                <a th:href="@{/admin/orderList}" class="btn-modern btn-modern-outline w-100 justify-content-start mb-2">
+                  <i class="fas fa-boxes text-primary mr-2"></i> View Customer Orders
+                </a>
+              </th:block>
+
+              <th:block sec:authorize="hasRole('ROLE_MANAGER')">
+                <a th:href="@{/admin/product}" class="btn-modern btn-modern-outline w-100 justify-content-start mb-2">
+                  <i class="fas fa-plus-circle text-success mr-2"></i> Create New Sneaker
+                </a>
+              </th:block>
+
+              <a th:href="@{/productList}" class="btn-modern btn-modern-outline w-100 justify-content-start mb-2">
+                <i class="fas fa-shoe-prints text-info mr-2"></i> Browse Shoe Catalog
+              </a>
+            </div>
+
+            <!-- Logout Button -->
+            <a th:href="@{/admin/logout}" class="btn-modern btn-modern-danger w-100">
+              <i class="fas fa-sign-out-alt mr-1"></i> Sign Out
+            </a>
+
+          </div>
+
+        </div>
       </div>
-       
-      <th:block th:include="_footer"></th:block>
-       
-   </body>
+    </div>
+  </div>
+
+  <th:block th:include="_footer"></th:block>
+</body>
 </html>

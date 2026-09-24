@@ -1,85 +1,128 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-   <head>
-      <meta charset="UTF-8">
-      <title>Shoe Shop Online</title>
-      <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
-      <th:block th:include="_header"></th:block>
-   </head>
-   <style>
-   	 <style>
-   	html, body{
-	height: 100%;
-	font-family: 'Lato', sans-serif;
-	font-family: 'Open Sans', sans-serif;
-	font-family: 'Abel', sans-serif;
-}
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Sneaker Product | KicksHub Admin</title>
+  <th:block th:include="_header"></th:block>
+</head>
+<body>
+  <div class="main-content">
+    <th:block th:include="_menu"></th:block>
 
-   </style>
-   <body>
-      
-      <th:block th:include="_menu"></th:block>
-       
-      <div class="container">
-      	<div class="row">
-      		<div class="col-lg-6 offset-3">
-      		
-      
-      <form th:object="${productForm}" th:action="@{/admin/product}"
-              method="POST" enctype="multipart/form-data">
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9">
+          
+          <div class="form-card-modern">
+            
+            <!-- Form Header -->
+            <div class="d-flex align-items-center justify-content-between mb-4 pb-2 border-bottom">
+              <div>
+                <span class="badge badge-primary font-weight-bold px-3 py-1 mb-1">Admin Dashboard</span>
+                <h3 class="font-weight-bold mb-0" style="font-size: 1.7rem;">
+                  <span th:if="${productForm.newProduct}">Add New Sneaker</span>
+                  <span th:if="${!productForm.newProduct}">Edit Sneaker Product</span>
+                </h3>
+              </div>
+              <a th:href="@{/productList}" class="btn-modern btn-modern-outline btn-modern-sm">
+                <i class="fas fa-arrow-left mr-1"></i> Catalog
+              </a>
+            </div>
+
+            <!-- Error Banner -->
+            <div th:if="${errorMessage != null}" class="alert alert-danger d-flex align-items-center gap-2 p-3 rounded-lg mb-4">
+              <i class="fas fa-exclamation-triangle mr-2"></i>
+              <span th:utext="${errorMessage}">Error occurred</span>
+            </div>
+
+            <!-- Product Form -->
+            <form th:object="${productForm}" th:action="@{/admin/product}"
+                  method="POST" enctype="multipart/form-data">
               
-              <div class="page-title">Product</div>
-      <div th:if="${errorMessage!= null}" class="error-message" th:utext="${errorMessage}">
+              <!-- Hidden New Product Flag -->
+              <input th:field="*{newProduct}" type="hidden" />
+
+              <!-- Product Code -->
+              <div class="form-group-modern">
+                <label class="form-label-modern">Sneaker Code *</label>
+                
+                <div th:if="${productForm.newProduct}" class="input-with-icon">
+                  <i class="fas fa-barcode"></i>
+                  <input type="text" class="form-control-modern" th:field="*{code}" 
+                         placeholder="e.g. S-009"
+                         th:classappend="${#fields.hasErrors('code')} ? 'is-invalid' : ''">
+                </div>
+
+                <div th:if="${!productForm.newProduct}">
+                  <span class="badge badge-dark p-2 font-weight-bold" style="font-size: 0.95rem;" th:utext="${productForm.code}">CODE</span>
+                  <input type="hidden" th:field="*{code}" />
+                </div>
+
+                <span class="error-message" th:if="${#fields.hasErrors('code')}" th:errors="*{code}">Invalid code</span>
+              </div>
+
+              <!-- Product Name -->
+              <div class="form-group-modern">
+                <label class="form-label-modern">Sneaker Name / Title *</label>
+                <div class="input-with-icon">
+                  <i class="fas fa-tag"></i>
+                  <input type="text" class="form-control-modern" th:field="*{name}"
+                         placeholder="e.g. Nike Air Force 1 '07"
+                         th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''">
+                </div>
+                <span class="error-message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name is required</span>
+              </div>
+
+              <!-- Price -->
+              <div class="form-group-modern">
+                <label class="form-label-modern">Price ($ USD) *</label>
+                <div class="input-with-icon">
+                  <i class="fas fa-dollar-sign"></i>
+                  <input type="number" step="0.01" class="form-control-modern" th:field="*{price}"
+                         placeholder="120.00"
+                         th:classappend="${#fields.hasErrors('price')} ? 'is-invalid' : ''">
+                </div>
+                <span class="error-message" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Valid price is required</span>
+              </div>
+
+              <!-- Current Image Preview -->
+              <div class="form-group-modern" th:if="${!productForm.newProduct and productForm.code != null}">
+                <label class="form-label-modern">Current Image</label>
+                <div class="p-2 border rounded-lg d-inline-block bg-light">
+                  <img th:src="@{|/productImage?code=${productForm.code}|}" 
+                       alt="Product Preview" style="max-height: 120px; object-fit: contain;"
+                       onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=200&q=80';">
+                </div>
+              </div>
+
+              <!-- Upload Image -->
+              <div class="form-group-modern">
+                <label class="form-label-modern">Upload Product Image</label>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="customFile" th:field="*{fileData}">
+                  <label class="custom-file-label" for="customFile">Choose image file...</label>
+                </div>
+                <small class="text-muted d-block mt-1">Accepts PNG, JPG, JPEG formats.</small>
+              </div>
+
+              <!-- Actions -->
+              <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mt-4 pt-3 border-top">
+                <a th:href="@{/productList}" class="btn-modern btn-modern-outline">
+                  Cancel
+                </a>
+                <button type="submit" class="btn-modern btn-modern-primary">
+                  <i class="fas fa-save mr-1"></i> Save Sneaker
+                </button>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
       </div>
-      
-  <div class="form-group">
-    <label for="exampleInputEmail1">Code</label>
-    <input th:field="*{newProduct}" type="hidden" />
-                  <input th:if="${productForm.newProduct}" type="text"
-                     th:field="*{code}" class="form-control"/>  
-                  <th:block th:if="${!productForm.newProduct}">   
-                       <span th:utext="${productForm.code}"></span>   
-                       <input type="hidden" th:field="*{code}"  />                                       
-                  </th:block> 
-    <span class="error-message" th:if="${#fields.hasErrors('code')}" th:errors="*{code}">..</span>  
-    
+    </div>
   </div>
- 
-  
-  <div class="form-group">
-    <label for="exampleInputPassword1">ProductName</label>
-    <input type="text" class="form-control" th:field="*{name}">
-    <span class="error-message" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">..</span>
-  </div>
-  
-  <div class="form-group">
-    <label for="exampleInputPassword1">Price</label>
-    <input type="text" class="form-control" th:field="*{price}">
-    <span class="error-message" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">..</span>
-  </div>
-  
-  <div class="form-group">
-    <label for="exampleInputPassword1">Image</label>
-    <img th:src="@{|/productImage?code=${productForm.code}|}" width="100"/>
-  </div>
-  
-  <div class="form-group">
-    <label for="exampleFormControlFile1">Upload Image</label>
-    <input type="file" class="form-control-file" id="exampleFormControlFile1" th:field="*{fileData}">
-  </div>
-  
-  <input type="submit" value="Submit" class="btn btn-primary"/>
-  <input type="reset" value="Reset" class="btn btn-outline-primary"/>
-</form>
- 
- </div>
-      	</div>
-      </div> 
-      
-      <!-- ------------------------------container end---------------------------------- -->
-      
-       
-      <th:block th:include="_footer"></th:block>
-       
-   </body>
+
+  <th:block th:include="_footer"></th:block>
+</body>
 </html>

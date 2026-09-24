@@ -1,22 +1,65 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-   <head>
-      <meta charset="UTF-8">
-      <title>Shoe Shop Online</title>
-      <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
-      <th:block th:include="_header"></th:block>
-   </head>
-   <body>
-      
-      <th:block th:include="_menu"></th:block>
-       
-      <div class="page-title">Finalize</div>
-      <div class="container">
-         <h3>Thank you for Order</h3>
-         Your order number is: <span th:utext="${lastOrderedCart.orderNum}"></span>
+<head>
+  <meta charset="UTF-8">
+  <title>Order Placed Successfully | KicksHub</title>
+  <th:block th:include="_header"></th:block>
+</head>
+<body>
+  <div class="main-content">
+    <th:block th:include="_menu"></th:block>
+
+    <div class="container">
+      <div class="finalize-success-card">
+        
+        <!-- Animated Success Icon -->
+        <div class="finalize-success-icon">
+          <i class="fas fa-check"></i>
+        </div>
+
+        <h2 class="font-weight-bold mb-2" style="font-size: 2.2rem; letter-spacing: -0.03em;">
+          Order Placed Successfully!
+        </h2>
+        
+        <p class="text-muted" style="font-size: 1.05rem;">
+          Thank you for choosing KicksHub. We've received your order and our team is already preparing your kicks for authentication and dispatch.
+        </p>
+
+        <!-- Order Number Highlight Pill -->
+        <div class="order-badge-pill" th:if="${lastOrderedCart != null}">
+          <i class="fas fa-receipt mr-2"></i> Order Number: #<span th:utext="${lastOrderedCart.orderNum}">1</span>
+        </div>
+
+        <!-- Order Info Card -->
+        <div class="card bg-light border-0 rounded-lg p-3 mx-auto mb-4 text-left" style="max-width: 440px;" th:if="${lastOrderedCart != null and lastOrderedCart.customerInfo != null}">
+          <div class="d-flex justify-content-between py-1 small">
+            <span class="text-muted">Recipient:</span>
+            <strong class="text-dark" th:utext="${lastOrderedCart.customerInfo.name}">Name</strong>
+          </div>
+          <div class="d-flex justify-content-between py-1 small">
+            <span class="text-muted">Total Amount:</span>
+            <strong class="text-success">$<span th:utext="${lastOrderedCart.amountTotal}">0.00</span></strong>
+          </div>
+          <div class="d-flex justify-content-between py-1 small">
+            <span class="text-muted">Delivery Address:</span>
+            <strong class="text-dark" th:utext="${lastOrderedCart.customerInfo.address}">Address</strong>
+          </div>
+        </div>
+
+        <!-- Action Links -->
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+          <a th:href="@{/productList}" class="btn-modern btn-modern-primary btn-modern-lg">
+            Continue Shopping <i class="fas fa-arrow-right ml-1"></i>
+          </a>
+          <a th:href="@{/}" class="btn-modern btn-modern-outline btn-modern-lg">
+            Back to Home
+          </a>
+        </div>
+
       </div>
-       
-      <th:block th:include="_footer"></th:block>
-       
-   </body>
-</html>>
+    </div>
+  </div>
+
+  <th:block th:include="_footer"></th:block>
+</body>
+</html>

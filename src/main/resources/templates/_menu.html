@@ -1,85 +1,109 @@
-<div class="menu-container"
+<header class="site-header"
    xmlns:th="http://www.thymeleaf.org"
-   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
+   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
    
-    <nav class="navbar navbar-expand-lg navbar-light navbar-full" style="background-color: #fff;" id="nav-main">
-      <a class="nav-link" th:href="@{/}">Shoe Shop <span class="sr-only">(current)</span></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/productList}">Products</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/shoppingCart}">Cart</a>
-      </li>
-      
-      <th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
-      <li class="nav-item">
-      	<a th:href="@{/admin/orderList}" class="nav-link">
-      Order List
+  <div class="container-fluid px-lg-5">
+    <nav class="navbar navbar-expand-lg navbar-light navbar-modern">
+      <!-- Brand Logo -->
+      <a class="brand-logo" th:href="@{/}">
+        <span class="brand-icon-box">
+          <i class="fas fa-shoe-prints"></i>
+        </span>
+        <span>
+          <span class="brand-text">KICKS</span><span class="brand-highlight">HUB</span>
+        </span>
       </a>
-      </li>
-      
-   </th:block>
-   <th:block sec:authorize="hasRole('ROLE_MANAGER')">
-   <li class="nav-item">
-      <a th:href="@{/admin/product}" class="nav-link">
-      Create Product
-      </a>
-      </li>
-   	</th:block>
-      
-      
-      <th:block sec:authorize="isAuthenticated()">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" th:href="@{/admin/accountInfo}" th:utext="${#request.userPrincipal.name}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Hello
-        </a>      
-         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" th:href="@{/admin/logout}">Logout</a>
-        </div>
-      </li>
-      </th:block>
-       
-      <th:block sec:authorize="!isAuthenticated()">
-      <li class="nav-item">
-         <a th:href="@{/admin/login}" class="nav-link">Login</a>
-         </li>
-      </th:block>
-      
 
-      
-      <!-- <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+      <!-- Mobile Toggler -->
+      <button class="navbar-toggler border-0 shadow-none" type="button" data-toggle="collapse" data-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars text-dark" style="font-size: 1.25rem;"></i>
+      </button>
+
+      <!-- Nav Items & Actions -->
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav mx-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/}">
+              <i class="fas fa-home"></i> Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/productList}">
+              <i class="fas fa-th-large"></i> Catalog
+            </a>
+          </li>
+
+          <!-- Admin / Employee Links -->
+          <th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
+            <li class="nav-item">
+              <a th:href="@{/admin/orderList}" class="nav-link">
+                <i class="fas fa-clipboard-list"></i> Orders
+              </a>
+            </li>
+          </th:block>
+
+          <!-- Manager Only Links -->
+          <th:block sec:authorize="hasRole('ROLE_MANAGER')">
+            <li class="nav-item">
+              <a th:href="@{/admin/product}" class="nav-link">
+                <i class="fas fa-plus-circle"></i> Add Product
+              </a>
+            </li>
+          </th:block>
+        </ul>
+
+        <!-- Right Side: Search, Cart & Account -->
+        <div class="d-flex align-items-center flex-column flex-lg-row gap-2 mt-3 mt-lg-0">
+          <!-- Search Form (Active with /productList?name=...) -->
+          <form class="nav-search-form my-2 my-lg-0" th:action="@{/productList}" method="get">
+            <i class="fas fa-search nav-search-icon"></i>
+            <input class="nav-search-input" type="search" name="name" placeholder="Search sneakers..." aria-label="Search">
+          </form>
+
+          <!-- Cart Button -->
+          <a class="nav-cart-btn my-2 my-lg-0" th:href="@{/shoppingCart}">
+            <i class="fas fa-shopping-bag"></i>
+            <span>Cart</span>
+            <span class="cart-count-badge" 
+                  th:if="${session.myCart != null and session.myCart.quantityTotal > 0}" 
+                  th:text="${session.myCart.quantityTotal}">0</span>
+          </a>
+
+          <!-- User Authenticated -->
+          <th:block sec:authorize="isAuthenticated()">
+            <div class="nav-item dropdown my-2 my-lg-0 ml-lg-2">
+              <a class="user-dropdown-btn dropdown-toggle" href="#" id="userMenuDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="user-avatar-circle">
+                  <i class="fas fa-user"></i>
+                </span>
+                <span th:utext="${#request.userPrincipal.name}">User</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right dropdown-menu-modern" aria-labelledby="userMenuDropdown">
+                <a class="dropdown-item" th:href="@{/admin/accountInfo}">
+                  <i class="fas fa-id-badge text-primary"></i> Account Profile
+                </a>
+                <th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_EMPLOYEE')">
+                  <a class="dropdown-item" th:href="@{/admin/orderList}">
+                    <i class="fas fa-box text-success"></i> Manage Orders
+                  </a>
+                </th:block>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-danger" th:href="@{/admin/logout}">
+                  <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+              </div>
+            </div>
+          </th:block>
+
+          <!-- User Not Authenticated -->
+          <th:block sec:authorize="!isAuthenticated()">
+            <a th:href="@{/admin/login}" class="nav-login-btn my-2 my-lg-0 ml-lg-2">
+              <i class="fas fa-user-circle"></i> Sign In
+            </a>
+          </th:block>
         </div>
-      </li> -->
-      
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-light my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
-    </form>
+
+      </div>
+    </nav>
   </div>
-</nav>
-<!-- ------------------------------nav end---------------------------------- -->
-   
- 
-   
-   
-   
-</div>
+</header>

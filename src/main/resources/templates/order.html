@@ -1,83 +1,116 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-   <head>
-      <meta charset="UTF-8">
-      <title>Shoe Shop Online</title>
-      <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
-      <th:block th:include="_header"></th:block>
-   </head>
-     <style>
-   	html, body{
-	height: 100%;
-	font-family: 'Lato', sans-serif;
-	font-family: 'Open Sans', sans-serif;
-	font-family: 'Abel', sans-serif;
-}
-  ul li{
-  	list-style: none;
-  }
-   </style>
-   <body>
-      
-      <th:block th:include="_menu"></th:block>
-      <div class="container">
-      	<div class="row">
-      		<div class="col-lg-8 ">
-       
-      
-       
-     
-   
-       </div>
-       <div class="col-lg-4">
-       <div class="customer-info-container">
-         <h3>Customer Information:</h3>
-         <ul>
-            <li>Name: <span th:utext="${orderInfo.customerName}"></span></li>
-            <li>Email: <span th:utext="${orderInfo.customerEmail}"></span></li>
-            <li>Phone: <span th:utext="${orderInfo.customerPhone}"></span></li>
-            <li>Address: <span th:utext="${orderInfo.customerAddress}"></span></li>
-         </ul>
-         <h3>Order Summary:</h3>
-         <ul>
-            <li>Total:
-               <span class="total" th:utext="${#numbers.formatDecimal(orderInfo.amount,3,2,'COMMA')}">         
-               </span>
-            </li>
-         </ul>
+<head>
+  <meta charset="UTF-8">
+  <title>Order Details | KicksHub Admin</title>
+  <th:block th:include="_header"></th:block>
+</head>
+<body>
+  <div class="main-content">
+    <th:block th:include="_menu"></th:block>
+
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          
+          <div class="form-card-modern">
+            <!-- Order Header -->
+            <div class="d-flex flex-wrap align-items-center justify-content-between mb-4 pb-3 border-bottom">
+              <div>
+                <span class="badge badge-success px-3 py-1 font-weight-bold mb-1">Order Fulfilled</span>
+                <h3 class="font-weight-bold mb-0" style="font-size: 1.8rem;">
+                  Invoice &bull; Order #<span th:utext="${orderInfo.orderNum}">1</span>
+                </h3>
+                <p class="text-muted small mb-0">
+                  Placed on <span th:utext="${#dates.format(orderInfo.orderDate,'dd MMMM yyyy, HH:mm')}">Date</span>
+                </p>
+              </div>
+
+              <div class="d-flex gap-2 mt-3 mt-md-0">
+                <a th:href="@{/admin/orderList}" class="btn-modern btn-modern-outline btn-modern-sm">
+                  <i class="fas fa-arrow-left mr-1"></i> Back to Orders
+                </a>
+                <button onclick="window.print()" class="btn-modern btn-modern-dark btn-modern-sm">
+                  <i class="fas fa-print mr-1"></i> Print Invoice
+                </button>
+              </div>
+            </div>
+
+            <!-- Customer Details Card -->
+            <div class="bg-light p-4 rounded-lg mb-4 border">
+              <h6 class="font-weight-bold text-uppercase text-secondary small mb-3">
+                <i class="fas fa-user-check text-primary mr-1"></i> Customer & Shipping Information
+              </h6>
+              <div class="row g-3">
+                <div class="col-md-6 mb-2">
+                  <span class="text-muted small d-block">Customer Name</span>
+                  <strong class="text-dark" th:utext="${orderInfo.customerName}">Name</strong>
+                </div>
+                <div class="col-md-6 mb-2">
+                  <span class="text-muted small d-block">Contact Phone</span>
+                  <strong class="text-dark" th:utext="${orderInfo.customerPhone}">Phone</strong>
+                </div>
+                <div class="col-md-6 mb-2">
+                  <span class="text-muted small d-block">Email Address</span>
+                  <strong class="text-dark" th:utext="${orderInfo.customerEmail}">Email</strong>
+                </div>
+                <div class="col-md-6 mb-2">
+                  <span class="text-muted small d-block">Delivery Destination</span>
+                  <strong class="text-dark" th:utext="${orderInfo.customerAddress}">Address</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Items Table -->
+            <h6 class="font-weight-bold text-uppercase text-secondary small mb-3">
+              <i class="fas fa-box text-primary mr-1"></i> Order Items
+            </h6>
+            <div class="table-responsive mb-4">
+              <table class="table-modern">
+                <thead>
+                  <tr>
+                    <th style="width: 140px;">Product Code</th>
+                    <th>Sneaker Name</th>
+                    <th class="text-center" style="width: 100px;">Quantity</th>
+                    <th class="text-right" style="width: 120px;">Unit Price</th>
+                    <th class="text-right" style="width: 140px;">Total Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="orderDetailInfo : ${orderInfo.details}">
+                    <td>
+                      <span class="badge badge-light border font-weight-bold" th:utext="${orderDetailInfo.productCode}">CODE</span>
+                    </td>
+                    <td>
+                      <strong class="text-dark" th:utext="${orderDetailInfo.productName}">Product Name</strong>
+                    </td>
+                    <td class="text-center font-weight-bold" th:utext="${orderDetailInfo.quanity}">1</td>
+                    <td class="text-right">
+                      $<span th:utext="${#numbers.formatDecimal(orderDetailInfo.price,1,2,'POINT')} ?: ${orderDetailInfo.price}">0.00</span>
+                    </td>
+                    <td class="text-right font-weight-bold text-dark">
+                      $<span th:utext="${#numbers.formatDecimal(orderDetailInfo.amount,1,2,'POINT')} ?: ${orderDetailInfo.amount}">0.00</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Total Amount Bar -->
+            <div class="d-flex justify-content-end align-items-center p-3 rounded-lg border bg-light">
+              <span class="font-weight-bold mr-3" style="font-size: 1.15rem;">Grand Total Paid:</span>
+              <span class="font-weight-bold text-primary" style="font-size: 1.7rem; font-family: var(--font-display);">
+                $<span th:utext="${#numbers.formatDecimal(orderInfo.amount,1,2,'POINT')} ?: ${orderInfo.amount}">0.00</span>
+              </span>
+            </div>
+
+          </div>
+
+        </div>
       </div>
-       </div>
-      	</div>
-      </div> 
-      
-      <!-- ------------------------------container end---------------------------------- -->
-      
-      <div class="container">
-      	<div class="row">
-      		<div class="col-lg-12 ">
-      		   <table class="table table-bordered">
-         <tr>
-            <th>Product Code</th>
-            <th>Product Name</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Amount</th>
-         </tr>
-         <tr th:each="orderDetailInfo : ${orderInfo.details}">
-            <td th:utext="${orderDetailInfo.productCode}"></td>
-            <td th:utext="${orderDetailInfo.productName}"></td>
-            <td th:utext="${orderDetailInfo.quanity}"></td>
-            <td th:utext="${#numbers.formatDecimal(orderDetailInfo.price,3,2,'COMMA')}"></td>
-            <td th:utext="${#numbers.formatDecimal(orderDetailInfo.amount,3,2,'COMMA')}"></td>
-         </tr>
-      </table>
-      		 </div>
-      	</div>
-      </div> 
-      
-      <!-- ------------------------------container end---------------------------------- -->
-       
-      <th:block th:include="_footer"></th:block>
-       
-   </body>
+    </div>
+  </div>
+
+  <th:block th:include="_footer"></th:block>
+</body>
 </html>

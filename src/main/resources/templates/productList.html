@@ -1,95 +1,118 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-   <head>
-      <meta charset="UTF-8">
-      <title>Shoe Shop Online</title>
-      <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
-      <th:block th:include="_header"></th:block>
-   </head>
-   <style>
-   	.box {
-    width: 230px;
-    height: 155px;
-    margin-bottom: 5px;
-	}
-	
-   </style>
-   <body>
-      
-      <th:block th:include="_menu"></th:block>
-      
-      
-  
-    <div class="container">
-        <h2 style="font-weight: bold;">Product List</h2>
-        
-        
-        <div class="row">
-          <div class="col-md-12 col-sm-12">
-           <div class="row">
-            
-            <div th:each="prodInfo : ${paginationProducts.list}">
-             <div class="">
-              <div class="display">
-     <img th:src="@{|/productImage?code=${prodInfo.code}|}" alt="..." 
-     style="width:280px; height:320px; margin-bottom:5px; margin-right:2px;">
-     <div class="box">
-      <h6 class="h6_offer">Originals</h6>
-      <p style="font-size:13px;"><span th:utext="${prodInfo.name}"></span><br>
-        $<span th:utext="${prodInfo.price}"></span>
-      </p>
-      <h6 class="h6_offer">2 colors</h6>
-      <a th:href="@{|/buyProduct?code=${prodInfo.code}|}" class="btn btn-link" >Buy Now</a>
-            </div>
-             </div>
-             
-             <!-- For Manager edit Product -->
-            <th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
-               
-                 <a style="color:red;"
-                    th:href="@{|/admin/product?code=${prodInfo.code}|}">Edit Product</a>
-               
-            </th:block>
-            </div>
-       		</div>
-      
-       
-      
-       
-      <br/>
-    
-      <!-- ------------------------------Offer end---------------------------------- -->
-      
-      </div> 
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+  <meta charset="UTF-8">
+  <title>Sneakers & Footwear Catalog | KicksHub</title>
+  <th:block th:include="_header"></th:block>
+</head>
+<body>
+  <div class="main-content">
+    <th:block th:include="_menu"></th:block>
 
+    <!-- Catalog Page Section -->
+    <div class="catalog-section">
+      <div class="container">
+        
+        <!-- Header & Breadcrumbs -->
+        <div class="catalog-header-bar">
+          <div>
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb bg-transparent p-0 mb-2" style="font-size: 0.85rem;">
+                <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Sneaker Catalog</li>
+              </ol>
+            </nav>
+            <h2 class="font-weight-bold mb-1" style="font-size: 2.2rem; letter-spacing: -0.03em;">
+              Footwear Collection
+            </h2>
+            <p class="text-muted small mb-0">Browse premium performance and street sneakers with guaranteed authenticity.</p>
+          </div>
 
+          <!-- Quick Filters -->
+          <div class="catalog-filter-pills">
+            <a th:href="@{/productList}" class="filter-pill" th:classappend="${param.name == null or param.name[0] == '' ? 'active' : ''}">All Kicks</a>
+            <a th:href="@{/productList(name='Running')}" class="filter-pill" th:classappend="${param.name != null and param.name[0] == 'Running' ? 'active' : ''}">Running</a>
+            <a th:href="@{/productList(name='Boost')}" class="filter-pill" th:classappend="${param.name != null and param.name[0] == 'Boost' ? 'active' : ''}">Boost</a>
+            <a th:href="@{/productList(name='Air')}" class="filter-pill" th:classappend="${param.name != null and param.name[0] == 'Air' ? 'active' : ''}">Air Edition</a>
+            <a th:href="@{/productList(name='Originals')}" class="filter-pill" th:classappend="${param.name != null and param.name[0] == 'Originals' ? 'active' : ''}">Originals</a>
           </div>
         </div>
-        <br><br>
-  <!-- nav start  -->
-  		<div class="row">
-  		<div class="col-lg-6 offset-4">
-        <div class="" th:if="${paginationProducts.totalPages > 1}">
-         <th:block th:each="page : ${paginationProducts.navigationPages}">
-         
-            <a th:href="@{|/productList?page=${page}|}" th:if="${page != -1}"
-               class="btn btn-dark" style="border-radius: 0%; margin:2px;" th:utext="${page}"></a>
-               
-            <span class="btn btn-dark" style="border-radius: 0%; margin:2px;" th:if="${page == -1}"> ... </span>
-             
-         </th:block>
-         </div>
-         </div>
-      </div> <!-- nav end -->
-    </div><!-- container end -->
-  
 
+        <!-- Search query active indicator -->
+        <div th:if="${param.name != null and param.name[0] != ''}" class="alert alert-light border d-inline-flex align-items-center gap-2 mb-4 py-2 px-3 rounded-pill shadow-xs">
+          <i class="fas fa-search text-muted mr-1"></i>
+          <span>Showing results for: <strong th:text="${param.name[0]}"></strong></span>
+          <a th:href="@{/productList}" class="ml-2 text-danger text-decoration-none" title="Clear filter">&times;</a>
+        </div>
 
-<!-- ------------------------------Offer end---------------------------------- -->
-      
-      
-       
-      <th:block th:include="_footer"></th:block>
-       
-   </body>
+        <!-- Empty Results Alert -->
+        <div th:if="${paginationProducts == null or paginationProducts.list == null or paginationProducts.list.empty}" class="empty-cart-container">
+          <div class="empty-cart-icon">
+            <i class="fas fa-shoe-prints"></i>
+          </div>
+          <h3>No Sneakers Found</h3>
+          <p>We couldn't find any products matching your search criteria. Try a different keyword or view all sneakers.</p>
+          <a th:href="@{/productList}" class="btn-modern btn-modern-primary">
+            View All Products
+          </a>
+        </div>
+
+        <!-- Product Grid -->
+        <div th:if="${paginationProducts != null and paginationProducts.list != null and !paginationProducts.list.empty}" class="product-grid">
+          <div class="sneaker-card" th:each="prodInfo : ${paginationProducts.list}">
+            <!-- Sneaker Card Image Wrapper -->
+            <div class="sneaker-card-img-wrapper">
+              <span class="sneaker-badge">Originals</span>
+              <img th:src="@{|/productImage?code=${prodInfo.code}|}" 
+                   th:alt="${prodInfo.name}"
+                   onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=80';">
+            </div>
+
+            <!-- Sneaker Card Body -->
+            <div class="sneaker-card-body">
+              <div class="sneaker-card-category">
+                Authentic Series &bull; <span th:text="${prodInfo.code}">Code</span>
+              </div>
+              
+              <h5 class="sneaker-card-title" th:utext="${prodInfo.name}">Product Name</h5>
+              
+              <div class="sneaker-card-price-row">
+                <div class="sneaker-price">
+                  <span class="currency">$</span><span th:utext="${prodInfo.price}">0.00</span>
+                </div>
+                
+                <a th:href="@{|/buyProduct?code=${prodInfo.code}|}" class="sneaker-buy-btn">
+                  <i class="fas fa-shopping-bag"></i> Buy Now
+                </a>
+              </div>
+
+              <!-- Manager Quick Edit -->
+              <th:block sec:authorize="hasAuthority('ROLE_MANAGER')">
+                <a th:href="@{|/admin/product?code=${prodInfo.code}|}" class="sneaker-admin-edit">
+                  <i class="fas fa-edit mr-1"></i> Edit Product
+                </a>
+              </th:block>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modern Pagination -->
+        <div class="pagination-wrapper" th:if="${paginationProducts != null and paginationProducts.totalPages > 1}">
+          <th:block th:each="page : ${paginationProducts.navigationPages}">
+            <a th:if="${page != -1}"
+               th:href="@{|/productList?page=${page}${param.name != null and param.name[0] != '' ? '&name=' + param.name[0] : ''}|}"
+               th:classappend="${page == paginationProducts.currentPage ? 'active' : ''}"
+               class="page-pill" 
+               th:utext="${page}">1</a>
+            
+            <span class="page-pill disabled" th:if="${page == -1}">...</span>
+          </th:block>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <th:block th:include="_footer"></th:block>
+</body>
 </html>

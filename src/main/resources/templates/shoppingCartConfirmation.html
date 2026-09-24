@@ -1,75 +1,176 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-   <head>
-      <meta charset="UTF-8">
-      <title>Shoe Shop Online</title>
-      <link rel="stylesheet" type="text/css" th:href="@{/style.css}" />
-      <th:block th:include="_header"></th:block>
-   </head>
-   <body>
-      
-      <th:block th:include="_menu"></th:block>
-       
-      <div class="page-title">Confirmation</div>
-      <div class="customer-info-container">
-         <h3>Customer Information:</h3>
-         <ul>
-            <li>Name: <span th:utext="${myCart.customerInfo.name}"></span></li>
-            <li>Email: <span th:utext="${myCart.customerInfo.email}"></span></li>
-            <li>Phone: <span th:utext="${myCart.customerInfo.phone}"></span></li>
-            <li>Address: <span th:utext="${myCart.customerInfo.address}"></span></li>
-         </ul>
-         <h3>Cart Summary:</h3>
-         <ul>
-            <li>Quantity: <span th:utext="${myCart.quantityTotal}"></span>$</li>
-            <li>Total:
-               <span class="total"
-                  th:utext="${#numbers.formatDecimal(myCart.amountTotal,3,2,'COMMA')}">  
-               </span>
-            </li>
-         </ul>
-      </div>
-      <form method="POST" th:action="@{/shoppingCartConfirmation}">
-         <!-- Edit Cart -->
-         <a class="navi-item" th:href="@{/shoppingCart}">
-         Edit Cart
-         </a>
-         <!-- Edit Customer Info -->
-         <a class="navi-item" th:href="@{/shoppingCartCustomer}">
-         Edit Customer Info
-         </a>
-         <!-- Send/Save -->
-         <input type="submit" value="Send" class="button-send-sc" />
-      </form>
+<head>
+  <meta charset="UTF-8">
+  <title>Review & Confirm Order | KicksHub</title>
+  <th:block th:include="_header"></th:block>
+</head>
+<body>
+  <div class="main-content">
+    <th:block th:include="_menu"></th:block>
+
+    <div class="cart-page-section">
       <div class="container">
-         <div class="product-preview-container" th:each="cartLineInfo : ${myCart.cartLines}">
-            <ul>
-               <li>
-                  <img class="product-image"
-                     src="@{|/productImage?code=${cartLineInfo.productInfo.code}|}" />
-               </li>
-               <li>
-                  Code: <span th:utext="${cartLineInfo.productInfo.code}"></span>
-                  <input
-                     type="hidden" name="code" th:value="${cartLineInfo.productInfo.code}" />
-               </li>
-               <li>Name: <span th:utext="${cartLineInfo.productInfo.name}"></span></li>
-               <li>Price:
-                  <span class="price"
-                     th:utext="${#numbers.formatDecimal(cartLineInfo.productInfo.price,3,2,'COMMA')}">
-                  </span>
-               </li>
-               <li>Quantity: <span th:utext="${cartLineInfo.quantity}"></span></li>
-               <li>Subtotal:
-                  <span class="subtotal"
-                     th:utext="${#numbers.formatDecimal(cartLineInfo.amount,3,2,'COMMA')}">
-                  </span>
-               </li>
-            </ul>
-         </div>
+        
+        <!-- Checkout Steps Nav -->
+        <div class="cart-steps-nav">
+          <div class="cart-step-item completed">
+            <span class="cart-step-num"><i class="fas fa-check"></i></span>
+            <span>1. Bag</span>
+          </div>
+          <div class="cart-step-divider"></div>
+          <div class="cart-step-item completed">
+            <span class="cart-step-num"><i class="fas fa-check"></i></span>
+            <span>2. Customer Info</span>
+          </div>
+          <div class="cart-step-divider"></div>
+          <div class="cart-step-item active">
+            <span class="cart-step-num">3</span>
+            <span>Review & Confirm</span>
+          </div>
+        </div>
+
+        <div class="row">
+          <!-- Left Column: Shipping Info & Item Details -->
+          <div class="col-lg-8 mb-4 mb-lg-0">
+            
+            <!-- Shipping Card -->
+            <div class="confirmation-card mb-4">
+              <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
+                <h5 class="font-weight-bold mb-0">
+                  <i class="fas fa-shipping-fast text-primary mr-2"></i> Shipping Address
+                </h5>
+                <a th:href="@{/shoppingCartCustomer}" class="small font-weight-bold text-primary">
+                  <i class="fas fa-edit mr-1"></i> Change
+                </a>
+              </div>
+              <div class="row g-3">
+                <div class="col-sm-6 mb-2">
+                  <span class="text-muted small d-block">Recipient Name</span>
+                  <strong class="text-dark" th:utext="${myCart.customerInfo.name}">Name</strong>
+                </div>
+                <div class="col-sm-6 mb-2">
+                  <span class="text-muted small d-block">Contact Phone</span>
+                  <strong class="text-dark" th:utext="${myCart.customerInfo.phone}">Phone</strong>
+                </div>
+                <div class="col-sm-6 mb-2">
+                  <span class="text-muted small d-block">Email Address</span>
+                  <strong class="text-dark" th:utext="${myCart.customerInfo.email}">Email</strong>
+                </div>
+                <div class="col-sm-6 mb-2">
+                  <span class="text-muted small d-block">Delivery Address</span>
+                  <strong class="text-dark" th:utext="${myCart.customerInfo.address}">Address</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- Items Review Card -->
+            <div class="confirmation-card">
+              <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom">
+                <h5 class="font-weight-bold mb-0">
+                  <i class="fas fa-box text-primary mr-2"></i> Review Items (<span th:text="${myCart.quantityTotal}">0</span>)
+                </h5>
+                <a th:href="@{/shoppingCart}" class="small font-weight-bold text-primary">
+                  <i class="fas fa-edit mr-1"></i> Edit Bag
+                </a>
+              </div>
+
+              <div class="table-responsive">
+                <table class="cart-table-modern">
+                  <thead>
+                    <tr>
+                      <th style="width: 90px;">Item</th>
+                      <th>Sneaker Details</th>
+                      <th class="text-center">Qty</th>
+                      <th class="text-right">Price</th>
+                      <th class="text-right">Subtotal</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="cartLineInfo : ${myCart.cartLines}">
+                      <td>
+                        <img class="cart-item-img" style="width: 70px; height: 70px;"
+                             th:src="@{|/productImage?code=${cartLineInfo.productInfo.code}|}"
+                             th:alt="${cartLineInfo.productInfo.name}"
+                             onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=200&q=80';">
+                      </td>
+                      <td>
+                        <div class="font-weight-bold text-dark" th:utext="${cartLineInfo.productInfo.name}">Shoe Name</div>
+                        <div class="small text-muted">Code: <span th:text="${cartLineInfo.productInfo.code}">CODE</span></div>
+                      </td>
+                      <td class="text-center font-weight-bold" th:utext="${cartLineInfo.quantity}">1</td>
+                      <td class="text-right">
+                        $<span th:utext="${#numbers.formatDecimal(cartLineInfo.productInfo.price,1,2,'POINT')} ?: ${cartLineInfo.productInfo.price}">0.00</span>
+                      </td>
+                      <td class="text-right font-weight-bold text-dark">
+                        $<span th:utext="${#numbers.formatDecimal(cartLineInfo.amount,1,2,'POINT')} ?: ${cartLineInfo.amount}">0.00</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right Column: Order Finalization Card -->
+          <div class="col-lg-4">
+            <div class="order-summary-card">
+              <h4>Final Summary</h4>
+              
+              <div class="summary-row">
+                <span>Items Count</span>
+                <strong><span th:utext="${myCart.quantityTotal}">0</span> pairs</strong>
+              </div>
+
+              <div class="summary-row">
+                <span>Subtotal</span>
+                <strong>$<span th:utext="${myCart.amountTotal}">0.00</span></strong>
+              </div>
+
+              <div class="summary-row">
+                <span>Express Delivery</span>
+                <span class="badge badge-success px-2 py-1">FREE</span>
+              </div>
+
+              <div class="summary-row total-row">
+                <span>Total Due</span>
+                <span class="total-amount">$<span th:utext="${myCart.amountTotal}">0.00</span></span>
+              </div>
+
+              <!-- Final Confirmation Form -->
+              <form method="POST" th:action="@{/shoppingCartConfirmation}" class="mt-4">
+                <button type="submit" class="btn-modern btn-modern-primary btn-modern-lg w-100">
+                  Place Order Now <i class="fas fa-check-circle ml-1"></i>
+                </button>
+              </form>
+
+              <div class="text-center mt-3">
+                <a th:href="@{/shoppingCart}" class="small text-muted">
+                  <i class="fas fa-undo mr-1"></i> Make Changes to Bag
+                </a>
+              </div>
+
+              <!-- Trust Notice -->
+              <div class="trust-badges-box">
+                <div class="trust-badge-item">
+                  <i class="fas fa-lock text-warning"></i>
+                  <span>Orders are encrypted and processed immediately</span>
+                </div>
+                <div class="trust-badge-item">
+                  <i class="fas fa-truck text-primary"></i>
+                  <span>Tracked dispatch within 24 hours</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
       </div>
-       
-      <th:block th:include="_footer"></th:block>
-       
-   </body>
+    </div>
+  </div>
+
+  <th:block th:include="_footer"></th:block>
+</body>
 </html>
