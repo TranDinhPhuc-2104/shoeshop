@@ -1,11 +1,11 @@
 # Build stage#
-FROM maven:3.5.3-jdk-8-alpine AS build
+FROM public.ecr.aws/docker/library/maven:3.5.3-jdk-8-alpine AS build
 WORKDIR /app
 COPY . .
 RUN mvn install -DskipTests=true
 
 # Run stage
-FROM alpine:3.19
+FROM public.ecr.aws/docker/library/alpine:3.19
 RUN apk add openjdk8
 WORKDIR /run
 COPY --from=build /app/target/shoe-ShoppingCart-0.0.1-SNAPSHOT.jar /run/shoe-ShoppingCart-0.0.1-SNAPSHOT.jar 
