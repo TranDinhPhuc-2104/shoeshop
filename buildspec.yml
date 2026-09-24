@@ -9,7 +9,7 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 415642395658.dkr.ecr.us-east-1.amazonaws.com
-      - REPOSITORY_URI=415642395658.dkr.ecr.us-east-1.amazonaws.com/staging/nestjs
+      - REPOSITORY_URI=415642395658.dkr.ecr.us-east-1.amazonaws.com/shoeshop
       - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
 
   build:
