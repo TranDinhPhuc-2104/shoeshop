@@ -31,7 +31,6 @@ import com.example.demo.utils.Utils;
 import com.example.demo.validator.CustomerFormValidator;
 
 @Controller
-@Transactional
 public class MainController {
  
    @Autowired
@@ -228,7 +227,9 @@ public class MainController {
       try {
          orderDAO.saveOrder(cartInfo);
       } catch (Exception e) {
- 
+         e.printStackTrace();
+         model.addAttribute("myCart", cartInfo);
+         model.addAttribute("errorMessage", "Error placing order: " + e.getMessage());
          return "shoppingCartConfirmation";
       }
  

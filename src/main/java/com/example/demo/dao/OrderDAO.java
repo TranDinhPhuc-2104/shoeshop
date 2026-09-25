@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.entity.Order;
@@ -43,7 +44,7 @@ public class OrderDAO {
         return value;
     }
  
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = Exception.class)
     public void saveOrder(CartInfo cartInfo) {
         Session session = this.sessionFactory.getCurrentSession();
  
