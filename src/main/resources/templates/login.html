@@ -11,134 +11,126 @@
 
     <div class="auth-page-section">
       <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-10 col-xl-9">
-            
-            <div class="auth-card-modern">
-              <div class="row no-gutters">
-                
-                <!-- Left: Login Form -->
-                <div class="col-lg-6 auth-form-side">
-                  <div class="mb-4">
-                    <div class="brand-logo mb-3">
-                      <span class="brand-icon-box" style="width: 36px; height: 36px; font-size: 0.95rem;">
-                        <i class="fas fa-shoe-prints"></i>
-                      </span>
-                      <span>KICKS<span class="brand-highlight">HUB</span></span>
-                    </div>
-                    <h3 class="font-weight-bold mb-1" style="font-size: 1.7rem;">Welcome Back</h3>
-                    <p class="text-muted small">Sign in to access your orders and management dashboard.</p>
-                  </div>
+        <div class="auth-card-modern">
+          
+          <!-- Left: Login Form -->
+          <div class="auth-form-side">
+            <div class="mb-4">
+              <div class="brand-logo mb-3">
+                <span class="brand-icon-box" style="width: 36px; height: 36px; font-size: 0.95rem;">
+                  <i class="fas fa-shoe-prints"></i>
+                </span>
+                <span>KICKS<span class="brand-highlight">HUB</span></span>
+              </div>
+              <h3 class="font-weight-bold mb-1" style="font-size: 1.7rem;">Welcome Back</h3>
+              <p class="text-muted small">Sign in to access your orders and management dashboard.</p>
+            </div>
 
-                  <!-- Error Alert -->
-                  <div th:if="${#session != null && #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null && #request.getParameter('error') == 'true'}"
-                       class="alert alert-danger d-flex align-items-center gap-2 p-3 rounded-lg mb-4" role="alert">
-                    <i class="fas fa-exclamation-circle text-danger mr-2" style="font-size: 1.2rem;"></i>
-                    <div class="small">
-                      <strong>Login Failed:</strong>
-                      <span th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">Invalid credentials</span>
-                    </div>
-                  </div>
+            <!-- Error Alert -->
+            <div th:if="${#session != null && #session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null && #request.getParameter('error') == 'true'}"
+                 class="alert alert-danger d-flex align-items-center gap-2 p-3 rounded-lg mb-4" role="alert">
+              <i class="fas fa-exclamation-circle text-danger mr-2" style="font-size: 1.2rem;"></i>
+              <div class="small">
+                <strong>Login Failed:</strong>
+                <span th:utext="${#session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}">Invalid credentials</span>
+              </div>
+            </div>
 
-                  <!-- Login Form -->
-                  <form method="POST" th:action="@{/j_spring_security_check}">
-                    <div class="form-group-modern">
-                      <label class="form-label-modern" for="loginUser">Username</label>
-                      <div class="input-with-icon">
-                        <i class="fas fa-user"></i>
-                        <input type="text" name="userName" id="loginUser" class="form-control-modern" 
-                               placeholder="Enter username" required autofocus>
-                      </div>
-                    </div>
-
-                    <div class="form-group-modern">
-                      <label class="form-label-modern" for="loginPass">Password</label>
-                      <div class="input-with-icon">
-                        <i class="fas fa-lock"></i>
-                        <input type="password" name="password" id="loginPass" class="form-control-modern" 
-                               placeholder="Enter password" required>
-                      </div>
-                    </div>
-
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="rememberMe">
-                        <label class="custom-control-label small text-muted" for="rememberMe">Remember me</label>
-                      </div>
-                      <a href="#" class="small text-muted">Forgot password?</a>
-                    </div>
-
-                    <button type="submit" class="btn-modern btn-modern-primary w-100">
-                      Sign In <i class="fas fa-arrow-right ml-1"></i>
-                    </button>
-                  </form>
-
-                  <!-- Demo Credentials Quick Access -->
-                  <div class="demo-quick-box">
-                    <div class="demo-quick-header">
-                      <span><i class="fas fa-bolt text-warning mr-1"></i> Quick Demo Access</span>
-                      <small class="text-muted">Click to fill</small>
-                    </div>
-                    <div class="demo-btn-grid">
-                      <button type="button" class="demo-fill-btn" onclick="quickFill('employee1', '123')">
-                        <span><strong>employee1</strong></span>
-                        <span class="demo-role-tag staff">Staff</span>
-                      </button>
-                      <button type="button" class="demo-fill-btn" onclick="quickFill('manager1', '123')">
-                        <span><strong>manager1</strong></span>
-                        <span class="demo-role-tag admin">Admin</span>
-                      </button>
-                    </div>
-                  </div>
-
+            <!-- Login Form -->
+            <form method="POST" th:action="@{/j_spring_security_check}">
+              <div class="form-group-modern">
+                <label class="form-label-modern" for="loginUser">Username</label>
+                <div class="input-with-icon">
+                  <i class="fas fa-user"></i>
+                  <input type="text" name="userName" id="loginUser" class="form-control-modern" 
+                         placeholder="Enter username" required autofocus>
                 </div>
+              </div>
 
-                <!-- Right: Brand Info & Club Perks -->
-                <div class="col-lg-6 auth-brand-side d-none d-lg-flex">
-                  <div class="position-relative w-100" style="z-index: 2;">
-                    <div class="auth-brand-badge">
-                      <span class="dot"></span>
-                      <span>VIP Creators Club</span>
-                    </div>
-                    <h3 class="auth-brand-title">
-                      STEP INTO EXCLUSIVE<br>SNEAKER DROPS
-                    </h3>
-                    <p class="auth-brand-desc">
-                      Join members around the globe who get priority access to restricted releases and secret promotions.
-                    </p>
-
-                    <ul class="auth-perk-list">
-                      <li>
-                        <i class="fas fa-check-circle"></i>
-                        <span>Early reservation on high-heat sneaker launches</span>
-                      </li>
-                      <li>
-                        <i class="fas fa-check-circle"></i>
-                        <span>Free express shipping on all VIP orders</span>
-                      </li>
-                      <li>
-                        <i class="fas fa-check-circle"></i>
-                        <span>Exclusive member pricing & seasonal discounts</span>
-                      </li>
-                      <li>
-                        <i class="fas fa-check-circle"></i>
-                        <span>24/7 dedicated sneakerhead concierge service</span>
-                      </li>
-                    </ul>
-
-                    <div class="auth-social-proof">
-                      <div class="stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                      </div>
-                      <span>Trusted by 50,000+ Sneakerheads</span>
-                    </div>
-                  </div>
+              <div class="form-group-modern">
+                <label class="form-label-modern" for="loginPass">Password</label>
+                <div class="input-with-icon">
+                  <i class="fas fa-lock"></i>
+                  <input type="password" name="password" id="loginPass" class="form-control-modern" 
+                         placeholder="Enter password" required>
                 </div>
+              </div>
 
+              <div class="d-flex align-items-center justify-content-between mb-4">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="rememberMe">
+                  <label class="custom-control-label small text-muted" for="rememberMe">Remember me</label>
+                </div>
+                <a href="#" class="small text-muted">Forgot password?</a>
+              </div>
+
+              <button type="submit" class="btn-modern btn-modern-primary w-100">
+                Sign In <i class="fas fa-arrow-right ml-1"></i>
+              </button>
+            </form>
+
+            <!-- Demo Credentials Quick Access -->
+            <div class="demo-quick-box">
+              <div class="demo-quick-header">
+                <span><i class="fas fa-bolt text-warning mr-1"></i> Quick Demo Access</span>
+                <small class="text-muted">Click to fill</small>
+              </div>
+              <div class="demo-btn-grid">
+                <button type="button" class="demo-fill-btn" onclick="quickFill('employee1', '123')">
+                  <span><strong>employee1</strong></span>
+                  <span class="demo-role-tag staff">Staff</span>
+                </button>
+                <button type="button" class="demo-fill-btn" onclick="quickFill('manager1', '123')">
+                  <span><strong>manager1</strong></span>
+                  <span class="demo-role-tag admin">Admin</span>
+                </button>
               </div>
             </div>
 
           </div>
+
+          <!-- Right: Brand Info & Club Perks -->
+          <div class="auth-brand-side">
+            <div class="position-relative w-100" style="z-index: 2;">
+              <div class="auth-brand-badge">
+                <span class="dot"></span>
+                <span>VIP Creators Club</span>
+              </div>
+              <h3 class="auth-brand-title">
+                STEP INTO EXCLUSIVE<br>SNEAKER DROPS
+              </h3>
+              <p class="auth-brand-desc">
+                Join members around the globe who get priority access to restricted releases and secret promotions.
+              </p>
+
+              <ul class="auth-perk-list">
+                <li>
+                  <i class="fas fa-check-circle"></i>
+                  <span>Early reservation on high-heat sneaker launches</span>
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i>
+                  <span>Free express shipping on all VIP orders</span>
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i>
+                  <span>Exclusive member pricing & seasonal discounts</span>
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i>
+                  <span>24/7 dedicated sneakerhead concierge service</span>
+                </li>
+              </ul>
+
+              <div class="auth-social-proof">
+                <div class="stars">
+                  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <span>Trusted by 50,000+ Sneakerheads</span>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

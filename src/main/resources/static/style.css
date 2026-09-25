@@ -1506,6 +1506,11 @@ img {
 }
 
 .auth-card-modern {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
   background: #ffffff;
   border-radius: var(--radius-xl);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -1514,19 +1519,24 @@ img {
 }
 
 .auth-form-side {
-  padding: 3rem 2.8rem;
+  padding: 3.5rem 3rem;
   background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
 .auth-brand-side {
   background: linear-gradient(145deg, #090d16 0%, #17153a 50%, #0f172a 100%);
   color: #ffffff;
-  padding: 3rem 2.8rem;
+  padding: 3.5rem 3rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
   border-left: 1px solid rgba(255, 255, 255, 0.08);
+  box-sizing: border-box;
 }
 
 .auth-brand-badge {
@@ -1919,8 +1929,13 @@ img {
   .perks-section {
     margin-top: 0;
   }
+  .auth-card-modern {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
+  }
   .auth-brand-side {
-    padding: 2.5rem 2rem;
+    display: none !important;
   }
   .auth-form-side {
     padding: 2.5rem 2rem;
